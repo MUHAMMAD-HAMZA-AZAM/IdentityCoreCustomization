@@ -7,6 +7,6 @@ namespace IdentityCode.Models
 {
     public class Dummy
     {
-
+        public string FirstName { get; set; }
     }
 }
