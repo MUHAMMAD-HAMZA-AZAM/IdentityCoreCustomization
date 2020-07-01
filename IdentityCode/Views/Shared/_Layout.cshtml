@@ -30,6 +30,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Role Manager
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="RoleManagment" asp-action="CreateRole">Create Role</a>
+                                <a class="dropdown-item" asp-controller="RoleManagment" asp-action="CreateRole">Change Role</a>
+                                <a class="dropdown-item" asp-controller="RoleManagment" asp-action="CreateRole">Get All Roles</a>
+                            </div>
+                        </li>
+
                         <partial name="_LoginPartial"/>
                     </ul>
                 </div>
