@@ -1,0 +1,54 @@
+﻿@model IdentityCode.ViewModels.CreateAppRoles
+
+<h1> Edit / Update Role </h1>
+
+<form method="post" class="mt-3">
+    <div class="from-group row">
+        <label asp-for="RoleId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="RoleId" disabled class="form-control" />
+        </div>
+    </div>
+    <div class="from-group row">
+        <label asp-for="RoleName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="RoleName" class="form-control" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row ">
+        <div class="col-sm-10">
+            <button  asp-controller="RoleManagment" asp-action="EditRole" asp-route-Id="@Model.RoleId" class="btn btn-info"> Update</button>
+            <button asp-controller="RoleManagment"  asp-action="RolesList" class="btn btn-secondary"> Cancel </button>
+        </div>
+    </div>
+    <div class="card ">
+        <div class="card-header">
+            <h3> App Users in this Role</h3>
+        </div>
+        <div class="card-body">
+            @if(Model.Users.Any())
+            {
+                var counter = 0;
+                
+                foreach(var userName in Model.Users)
+                {
+                    
+                    <h5>@userName</h5>
+                    counter++;
+                }
+                <h5>Total App Users Belongs to this Role @counter</h5>
+
+            }
+            else
+            {
+                <h5>No Any App User Found to Have this Role</h5>
+            }
+
+        </div>
+        <div class="card-footer">
+            <a href="#"  class="btn btn-info">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</form>
