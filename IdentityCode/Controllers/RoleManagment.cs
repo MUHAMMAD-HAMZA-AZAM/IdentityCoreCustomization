@@ -5,11 +5,13 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using IdentityCode.Models;
 using IdentityCode.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityCode.Controllers
 {
+    [Authorize(Roles ="SuperAdmin,Admin")]
     public class RoleManagment : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;

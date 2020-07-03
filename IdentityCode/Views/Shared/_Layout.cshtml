@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<AppCustomer> signinManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,6 +32,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (signinManager.IsSignedIn(User) && User.IsInRole("SuperAdmin"))
+                        {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Role Manager
@@ -40,7 +44,7 @@
                                 <a class="dropdown-item" asp-controller="RoleManagment" asp-action="RolesList">Get All Roles</a>
                             </div>
                         </li>
-
+                        }
                         <partial name="_LoginPartial"/>
                     </ul>
                 </div>
