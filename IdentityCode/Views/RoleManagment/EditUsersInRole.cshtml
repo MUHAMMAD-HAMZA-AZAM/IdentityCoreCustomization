@@ -19,18 +19,21 @@
                 
                 @for(int i=0;i<Model.Count;i++)
                 {
-                    <div class="form-check m-1">
-                        <input asp-for="@Model[i].IsSelected" class="form-check-input"/>
-                        <label class="form-check-label">
-                            @Model[i].UserName
-                        </label>
-                    </div>
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].UserId" />
+                    <input type="hidden" asp-for="@Model[i].UserName" />
+                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                        @Model[i].UserName
+
+                    </label>
+                </div>
                 }
 
             </div>
             <div class="card-footer text-muted">
                 <input type="submit" value="Update" class="btn btn-info"/>
-                <a asp-controller="RoleManagment" asp-action="EditRole" asp-route-id="@roleId" class="btn btn-danger">Cancel</a>
+                <a asp-controller="RoleManagment" asp-action="EditRole" asp-route-RoleId="@roleId" class="btn btn-danger">Cancel</a>
             </div>
         </div>
     </form>
