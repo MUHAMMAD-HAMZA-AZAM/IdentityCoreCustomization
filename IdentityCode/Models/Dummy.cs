@@ -8,5 +8,7 @@ namespace IdentityCode.Models
     public class Dummy
     {
         public string FirstName { get; set; }
+        
+        public string LastName {get;set}
     }
 }
