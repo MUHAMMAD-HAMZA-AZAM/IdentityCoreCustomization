@@ -19,6 +19,13 @@ namespace IdentityCode.ViewModels
 
            Users = new List<string>();
         }
+        
+        public string UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public bool IsSelected { get; set; }
+
         [Display(Name =" Role Id")]
         public string RoleId { get; set; }
 

@@ -21,7 +21,7 @@ namespace IdentityCode.Controllers
             this.userManager = userManager;
         }
 
-        [AcceptVerbs("Get","Posy")]
+        [AcceptVerbs("Get","Post")]
         public async Task<IActionResult> IsRoleExist(string RoleName)
         {
            var result= await roleManager.FindByNameAsync(RoleName);
@@ -129,6 +129,40 @@ namespace IdentityCode.Controllers
                 return View(createAppRoles);
             }
 
+        }
+
+        // Add or remove User from the Role 
+
+        [HttpGet]
+        public async Task<IActionResult> EditUsersInRole (CreateAppRoles createAppRoles)
+        {
+            ViewBag.RoleId = createAppRoles.RoleId;
+            var role = await roleManager.FindByIdAsync(createAppRoles.RoleId);
+          //  var roleName = await roleManager.FindByNameAsync(createAppRoles.RoleName);
+            if(role==null)
+            {
+                ViewBag.ErrorMessage = $" Role Name not found ";
+            }
+            var model = new List<CreateAppRoles>();
+            foreach(var user in userManager.Users)
+            {
+                var userroledata = new CreateAppRoles
+                {
+                    UserId = user.Id,
+                    UserName = user.Email
+                };
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userroledata.IsSelected = true;
+                }
+                else
+                {
+                    userroledata.IsSelected = false;
+                }
+                model.Add(userroledata);
+            }
+           
+            return View(model);
         }
 
 
