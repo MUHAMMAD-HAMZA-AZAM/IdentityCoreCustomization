@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityCode.Controllers
 {
-    [Authorize(Roles ="SuperAdmin,Admin")]
+    [Authorize(Roles ="SuperAdmin,Admin,User")]
     public class RoleManagment : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -22,6 +22,9 @@ namespace IdentityCode.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+
+
+      
 
         [AcceptVerbs("Get","Post")]
         public async Task<IActionResult> IsRoleExist(string RoleName)
