@@ -12,5 +12,6 @@ namespace IdentityCode.Models
         public string LastName { get; set; }
         
         public string Address {get;set;}
+
     }
 }
