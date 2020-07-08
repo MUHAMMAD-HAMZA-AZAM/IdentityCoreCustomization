@@ -1,0 +1,71 @@
+﻿@model IdentityCode.ViewModels.UserViewModel
+
+<h4 class="text-info ">Update User Record</h4>
+<form method="post" class="mt-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group row">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group row ">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group row ">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group row ">
+        <input type="submit" asp-controller="UserManagement" asp-action="EditUser" value="Update" class="btn btn-success" />&nbsp;&nbsp;&nbsp;
+        <a asp-controller="UserManagement" asp-action="UsersList" class="btn btn-primary">Cancel</a>
+    </div>
+
+    @if (Model.Roles.Any())
+    {
+        <br />
+        <div class="card">
+            <div class="card-header">
+                <h3> User Roles</h3>
+            </div>
+
+        </div>
+        <br />
+
+        foreach (var role in Model.Roles)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@role</h5>
+                </div>
+                <div class="card-footer text-muted">
+                    <a  asp-action="EditUser" asp-route-id="" class="btn btn-info">Manage Roles</a>
+                    
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                This User Have no Role !!
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text"></p>
+                <a class="btn btn-primary" id="register" asp-area="Identity" asp-page="/Account/Register"></a>
+
+            </div>
+        </div>
+    }
+
+</form>
+

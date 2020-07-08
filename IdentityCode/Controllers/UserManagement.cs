@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityCode.Models;
+using IdentityCode.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,9 +31,39 @@ namespace IdentityCode.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditUser(AppCustomer appCustomer)
+        public async Task<IActionResult> EditUser(AppCustomer appCustomer)
         {
-            return View();
+            var user = await userManager.FindByIdAsync(appCustomer.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $" User not found ";
+                return View("Not Found");
+            }
+            var userRoles = await userManager.GetRolesAsync(user);
+            var model = new UserViewModel
+            {
+                Id=user.Id,
+                FirstName = user.FirstName,
+                LastName=user.LastName,
+                Email=user.Email,
+                Roles=userRoles
+            };
+
+                return View(model);
+            
+           
+        }
+
+        [HttpPost]
+        public  async Task<IActionResult> EditUser(UserViewModel userViewModel)
+        {
+            var user = await userManager.FindByIdAsync(userViewModel.Id);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $" User not found ";
+                return View("Not Found");
+            }
+            return View(user);
         }
 
     }

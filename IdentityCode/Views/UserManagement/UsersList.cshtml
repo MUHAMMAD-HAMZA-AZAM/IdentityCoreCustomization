@@ -2,12 +2,14 @@
 
 
 <h3 class="text-info"> Help Factory Users  </h3>
-<br />
+
 
 @if (Model.Any())
 {
+    <br />
     <a class="btn btn-primary" id="register" asp-area="Identity" asp-page="/Account/Register">Add New User</a>
-
+    <br /><br />
+    <br />
 
     foreach (var user in Model)
     {
